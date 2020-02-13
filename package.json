@@ -44,6 +44,8 @@
     "ts-node": "^8.6.2",
     "ts-sinon": "^1.0.24",
     "tsconfig-paths": "^3.9.0",
+    "typedoc": "^0.16.9",
+    "typedoc-plugin-markdown": "^2.2.16",
     "typescript": "^3.7.5",
     "typings": "^2.1.1",
     "uuid": "^3.4.0"
@@ -51,7 +53,7 @@
   "homepage": "https://github.com/ehacke/redis#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && docs"
     }
   },
   "keywords": [
@@ -100,6 +102,7 @@
   },
   "scripts": {
     "build": "rm -rf ./dist && tsc -p tsconfig.build.json",
+    "docs": "typedoc --plugin typedoc-plugin-markdown --readme none --exclude \"tests/**/*.+(unit|it).+(ts|js)\"",
     "integration": "nyc mocha --recursive -r source-map-support/register -r ts-node/register -r tsconfig-paths/register --use_strict --exit \"tests/**/*.it.+(ts|js)\"",
     "lint": "fixpack && prettier-eslint --write && eslint --fix \"**/*.{js,ts}\"",
     "prepare": "fixpack && npm run build",
