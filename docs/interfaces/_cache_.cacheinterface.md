@@ -36,7 +36,7 @@
 
 ▸ **del**(`key`: string): *Promise‹void›*
 
-*Defined in [cache.ts:25](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L25)*
+*Defined in [cache.ts:25](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L25)*
 
 **Parameters:**
 
@@ -52,7 +52,7 @@ ___
 
 ▸ **delList**(`key`: string): *Promise‹void›*
 
-*Defined in [cache.ts:26](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L26)*
+*Defined in [cache.ts:26](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L26)*
 
 **Parameters:**
 
@@ -68,7 +68,7 @@ ___
 
 ▸ **delLists**(): *Promise‹void›*
 
-*Defined in [cache.ts:27](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L27)*
+*Defined in [cache.ts:27](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L27)*
 
 **Returns:** *Promise‹void›*
 
@@ -78,7 +78,7 @@ ___
 
 ▸ **disable**(): *void*
 
-*Defined in [cache.ts:20](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L20)*
+*Defined in [cache.ts:20](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L20)*
 
 **Returns:** *void*
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **enable**(): *void*
 
-*Defined in [cache.ts:19](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L19)*
+*Defined in [cache.ts:19](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L19)*
 
 **Returns:** *void*
 
@@ -98,7 +98,7 @@ ___
 
 ▸ **get**(`key`: string): *Promise‹T | null›*
 
-*Defined in [cache.ts:23](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L23)*
+*Defined in [cache.ts:23](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L23)*
 
 **Parameters:**
 
@@ -114,7 +114,7 @@ ___
 
 ▸ **getList**(`key`: string): *Promise‹T[] | null›*
 
-*Defined in [cache.ts:24](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L24)*
+*Defined in [cache.ts:24](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L24)*
 
 **Parameters:**
 
@@ -130,7 +130,7 @@ ___
 
 ▸ **invalidate**(`prefix?`: any): *Promise‹void›*
 
-*Defined in [cache.ts:28](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L28)*
+*Defined in [cache.ts:28](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L28)*
 
 **Parameters:**
 
@@ -146,7 +146,7 @@ ___
 
 ▸ **set**(`key`: string, `instance`: T, `overrideTtlSec?`: undefined | number): *Promise‹void›*
 
-*Defined in [cache.ts:21](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L21)*
+*Defined in [cache.ts:21](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L21)*
 
 **Parameters:**
 
@@ -164,7 +164,7 @@ ___
 
 ▸ **setList**(`key`: string, `instances`: T[], `overrideTtlSec?`: undefined | number): *Promise‹void›*
 
-*Defined in [cache.ts:22](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L22)*
+*Defined in [cache.ts:22](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L22)*
 
 **Parameters:**
 

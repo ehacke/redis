@@ -35,7 +35,7 @@
 
 ▸ **del**(): *Promise‹void›*
 
-*Defined in [cached.ts:19](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L19)*
+*Defined in [cached.ts:19](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L19)*
 
 **Returns:** *Promise‹void›*
 
@@ -45,7 +45,7 @@ ___
 
 ▸ **delList**(): *Promise‹void›*
 
-*Defined in [cached.ts:21](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L21)*
+*Defined in [cached.ts:21](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L21)*
 
 **Returns:** *Promise‹void›*
 
@@ -57,7 +57,7 @@ ___
 
 *Implementation of [CacheInterface](../interfaces/_cache_.cacheinterface.md)*
 
-*Defined in [cached.ts:25](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L25)*
+*Defined in [cached.ts:25](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L25)*
 
 **Returns:** *Promise‹void›*
 
@@ -69,7 +69,7 @@ ___
 
 *Implementation of [CacheInterface](../interfaces/_cache_.cacheinterface.md)*
 
-*Defined in [cached.ts:29](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L29)*
+*Defined in [cached.ts:29](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L29)*
 
 **Returns:** *void*
 
@@ -81,7 +81,7 @@ ___
 
 *Implementation of [CacheInterface](../interfaces/_cache_.cacheinterface.md)*
 
-*Defined in [cached.ts:31](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L31)*
+*Defined in [cached.ts:31](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L31)*
 
 **Returns:** *void*
 
@@ -91,7 +91,7 @@ ___
 
 ▸ **get**(): *Promise‹T | null›*
 
-*Defined in [cached.ts:33](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L33)*
+*Defined in [cached.ts:33](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L33)*
 
 **Returns:** *Promise‹T | null›*
 
@@ -101,7 +101,7 @@ ___
 
 ▸ **getList**(): *Promise‹T[] | null›*
 
-*Defined in [cached.ts:37](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L37)*
+*Defined in [cached.ts:37](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L37)*
 
 **Returns:** *Promise‹T[] | null›*
 
@@ -111,7 +111,7 @@ ___
 
 ▸ **invalidate**(): *Promise‹void›*
 
-*Defined in [cached.ts:41](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L41)*
+*Defined in [cached.ts:41](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L41)*
 
 **Returns:** *Promise‹void›*
 
@@ -121,7 +121,7 @@ ___
 
 ▸ **set**(): *Promise‹void›*
 
-*Defined in [cached.ts:43](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L43)*
+*Defined in [cached.ts:43](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L43)*
 
 **Returns:** *Promise‹void›*
 
@@ -131,6 +131,6 @@ ___
 
 ▸ **setList**(): *Promise‹void›*
 
-*Defined in [cached.ts:45](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L45)*
+*Defined in [cached.ts:45](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L45)*
 
 **Returns:** *Promise‹void›*

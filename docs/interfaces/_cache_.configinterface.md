@@ -29,7 +29,7 @@
 
 • **prefix**: *string*
 
-*Defined in [cache.ts:11](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L11)*
+*Defined in [cache.ts:11](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L11)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 • **resetOnReconnection**? : *undefined | false | true*
 
-*Defined in [cache.ts:13](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L13)*
+*Defined in [cache.ts:13](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L13)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 • **ttlSec**: *number*
 
-*Defined in [cache.ts:12](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L12)*
+*Defined in [cache.ts:12](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L12)*
 
 ## Methods
 
@@ -53,7 +53,7 @@ ___
 
 ▸ **parseFromCache**(`instance`: string): *Promise‹T› | T*
 
-*Defined in [cache.ts:15](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L15)*
+*Defined in [cache.ts:15](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L15)*
 
 **Parameters:**
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **stringifyForCache**(`instance`: T): *Promise‹string› | string*
 
-*Defined in [cache.ts:14](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L14)*
+*Defined in [cache.ts:14](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L14)*
 
 **Parameters:**
 

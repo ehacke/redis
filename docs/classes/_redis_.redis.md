@@ -238,7 +238,7 @@
 
 \+ **new Redis**(...`args`: any[]): *[Redis](_redis_.redis.md)*
 
-*Defined in [redis.ts:42](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L42)*
+*Defined in [redis.ts:42](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L42)*
 
 **Parameters:**
 
@@ -254,7 +254,7 @@ Name | Type | Description |
 
 • **NAME**: *string*
 
-*Defined in [redis.ts:56](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L56)*
+*Defined in [redis.ts:56](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L56)*
 
 ___
 
@@ -272,7 +272,7 @@ ___
 
 • **debounced**: *object*
 
-*Defined in [redis.ts:60](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L60)*
+*Defined in [redis.ts:60](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L60)*
 
 #### Type declaration:
 
@@ -284,7 +284,7 @@ ___
 
 • **redlock**: *Redlock*
 
-*Defined in [redis.ts:58](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L58)*
+*Defined in [redis.ts:58](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L58)*
 
 ___
 
@@ -767,7 +767,7 @@ ___
 
 ▸ **createRedlock**(`config`: Options): *Redlock*
 
-*Defined in [redis.ts:106](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L106)*
+*Defined in [redis.ts:106](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L106)*
 
 Get redlock instance
 
@@ -820,7 +820,7 @@ ___
 
 ▸ **debounce**(`callback`: Function, `key`: string, `timeoutMs`: number, `skewMs`: number): *Promise‹any›*
 
-*Defined in [redis.ts:164](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L164)*
+*Defined in [redis.ts:164](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L164)*
 
 Debounce a callback using Redis and setTimeout locally
 
@@ -2782,7 +2782,7 @@ ___
 
 ▸ **lock**(`key`: string, `ttl`: number): *Promise‹Lock | null›*
 
-*Defined in [redis.ts:68](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L68)*
+*Defined in [redis.ts:68](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L68)*
 
 Acquire lock in Redis
 
@@ -4623,7 +4623,7 @@ ___
 
 ▸ **scanPromise**(`options?`: ScanStreamOption): *Promise‹string[]›*
 
-*Defined in [redis.ts:115](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L115)*
+*Defined in [redis.ts:115](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L115)*
 
 Wrapper for scanStream that returns a promise
 
@@ -7150,7 +7150,7 @@ ___
 
 ▸ **zscanPromise**(`key`: KeyType, `options?`: ScanStreamOption): *Promise‹string[]›*
 
-*Defined in [redis.ts:138](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L138)*
+*Defined in [redis.ts:138](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L138)*
 
 Wrapper for scanStream that returns a promise
 
@@ -7253,22 +7253,22 @@ Name | Type |
 
 ### ▪ **CONSTANTS**: *object*
 
-*Defined in [redis.ts:42](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L42)*
+*Defined in [redis.ts:42](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L42)*
 
 ###  DEFAULT_SKEW_MS
 
 • **DEFAULT_SKEW_MS**: *number* = 5
 
-*Defined in [redis.ts:42](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L42)*
+*Defined in [redis.ts:42](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L42)*
 
 ###  SEARCH_FIELD_TYPES
 
 • **SEARCH_FIELD_TYPES**: *[SEARCH_FIELD_TYPES](../enums/_redis_.search_field_types.md)*
 
-*Defined in [redis.ts:42](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L42)*
+*Defined in [redis.ts:42](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L42)*
 
 ###  SEARCH_FIELD_TYPE_VALUES
 
 • **SEARCH_FIELD_TYPE_VALUES**: *[TAG](../enums/_redis_.search_field_types.md#tag) | [TEXT](../enums/_redis_.search_field_types.md#text) | [NUMERIC](../enums/_redis_.search_field_types.md#numeric) | [GEO](../enums/_redis_.search_field_types.md#geo)[]* = Object.values(SEARCH_FIELD_TYPES)
 
-*Defined in [redis.ts:42](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L42)*
+*Defined in [redis.ts:42](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L42)*

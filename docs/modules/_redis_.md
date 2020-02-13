@@ -22,7 +22,7 @@
 
 ▸ **processMultiResults**(`results`: null | string | number[][]): *null | string | number[]*
 
-*Defined in [redis.ts:21](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L21)*
+*Defined in [redis.ts:21](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L21)*
 
 Process the returned array from a transaction, throwing errors if any exist
 

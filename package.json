@@ -53,7 +53,7 @@
   "homepage": "https://github.com/ehacke/redis#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run docs"
+      "pre-commit": "lint-staged"
     }
   },
   "keywords": [
@@ -64,13 +64,12 @@
   "license": "MIT",
   "lint-staged": {
     "package.json": [
-      "fixpack",
-      "git add"
+      "fixpack"
     ],
     "**/*.{js,ts}": [
       "prettier-eslint --write",
       "eslint --fix",
-      "git add"
+      "npm run docs"
     ]
   },
   "main": "dist/index.js",

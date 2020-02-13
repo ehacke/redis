@@ -18,4 +18,4 @@
 
 • **redis**: *[Redis](../classes/_redis_.redis.md)*
 
-*Defined in [cache.ts:7](https://github.com/ehacke/redis/blob/a3c2667/cache.ts#L7)*
+*Defined in [cache.ts:7](https://github.com/ehacke/redis/blob/0881c54/cache.ts#L7)*

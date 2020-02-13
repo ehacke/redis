@@ -36,7 +36,7 @@
 
 \+ **new Cached**(): *[Cached](_cached_.cached.md)*
 
-*Defined in [cached.ts:53](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L53)*
+*Defined in [cached.ts:53](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L53)*
 
 **Returns:** *[Cached](_cached_.cached.md)*
 
@@ -46,7 +46,7 @@
 
 • **_cache**: *[CacheInterface](../interfaces/_cache_.cacheinterface.md)‹T›*
 
-*Defined in [cached.ts:78](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L78)*
+*Defined in [cached.ts:78](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L78)*
 
 ## Accessors
 
@@ -54,7 +54,7 @@
 
 • **get cache**(): *[CacheInterface](../interfaces/_cache_.cacheinterface.md)‹T›*
 
-*Defined in [cached.ts:74](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L74)*
+*Defined in [cached.ts:74](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L74)*
 
 Cache getter
 
@@ -66,7 +66,7 @@ Cache getter
 
 ▸ **configureCache**(`services`: [ServicesInterface](../interfaces/_cache_.servicesinterface.md), `config`: [ConfigInterface](../interfaces/_cache_.configinterface.md)‹T›): *void*
 
-*Defined in [cached.ts:66](https://github.com/ehacke/redis/blob/a3c2667/cached.ts#L66)*
+*Defined in [cached.ts:66](https://github.com/ehacke/redis/blob/0881c54/cached.ts#L66)*
 
 Initialize cache configuration
 

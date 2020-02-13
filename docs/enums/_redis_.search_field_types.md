@@ -17,7 +17,7 @@
 
 • **GEO**: = "geo"
 
-*Defined in [redis.ts:13](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L13)*
+*Defined in [redis.ts:13](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L13)*
 
 ___
 
@@ -25,7 +25,7 @@ ___
 
 • **NUMERIC**: = "numeric"
 
-*Defined in [redis.ts:12](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L12)*
+*Defined in [redis.ts:12](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L12)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **TAG**: = "tag"
 
-*Defined in [redis.ts:10](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L10)*
+*Defined in [redis.ts:10](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L10)*
 
 ___
 
@@ -41,4 +41,4 @@ ___
 
 • **TEXT**: = "text"
 
-*Defined in [redis.ts:11](https://github.com/ehacke/redis/blob/a3c2667/redis.ts#L11)*
+*Defined in [redis.ts:11](https://github.com/ehacke/redis/blob/0881c54/redis.ts#L11)*
