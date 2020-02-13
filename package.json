@@ -53,7 +53,7 @@
   "homepage": "https://github.com/ehacke/redis#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && docs"
+      "pre-commit": "lint-staged && npm run docs"
     }
   },
   "keywords": [
