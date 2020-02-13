@@ -49,6 +49,11 @@
     "uuid": "^3.4.0"
   },
   "homepage": "https://github.com/ehacke/redis#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "keywords": [
     "ioredis",
     "redis",
@@ -60,7 +65,7 @@
       "fixpack",
       "git add"
     ],
-    "**/*.js, **/*.ts": [
+    "**/*.{js,ts}": [
       "prettier-eslint --write",
       "eslint --fix",
       "git add"
