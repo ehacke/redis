@@ -48,7 +48,7 @@
     "ioredis": "^4.17.1",
     "jsdoc": "^3.6.4",
     "lint-staged": "^10.2.4",
-    "mocha": "^7.1.2",
+    "mocha": "^10.2.0",
     "nyc": "^15.0.1",
     "prettier": "^2.0.5",
     "prettier-eslint-cli": "^5.0.0",
