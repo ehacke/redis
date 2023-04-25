@@ -13,7 +13,7 @@ interface ConfigInterface<T> {
   parseFromCache(instance: string): Promise<T> | T;
 }
 
-/* eslint-disable class-methods-use-this, require-jsdoc, no-empty-function, @typescript-eslint/no-empty-function */
+/* eslint-disable class-methods-use-this, no-empty-function, @typescript-eslint/no-empty-function */
 
 class NoCache<T> implements CacheInterface<T> {
   async del(): Promise<void> {}
@@ -62,7 +62,7 @@ class NoCache<T> implements CacheInterface<T> {
   }
 }
 
-/* eslint-enable class-methods-use-this, require-jsdoc, no-empty-function, @typescript-eslint/no-empty-function */
+/* eslint-enable class-methods-use-this, no-empty-function, @typescript-eslint/no-empty-function */
 
 /**
  * @class
@@ -76,6 +76,7 @@ export class Cached<T> {
 
   /**
    * Initialize cache configuration
+   *
    * @param {ServicesInterface} services
    * @param {ConfigInterface} config
    * @returns {void}
@@ -86,6 +87,7 @@ export class Cached<T> {
 
   /**
    * Cache getter
+   *
    * @returns {CacheInterface<T>}
    */
   get cache(): CacheInterface<T> {

@@ -1,9 +1,14 @@
 import Bluebird from 'bluebird';
 import fs from 'fs';
-import { isBoolean, isInteger, isObject, isString } from 'lodash';
+import { isBoolean, isInteger, isObject, isString } from 'lodash-es';
 import path from 'path';
-
+import { fileURLToPath } from 'url';
 import { Redis } from './redis';
+
+const { dirname } = path;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 interface ServicesInterface {
   redis: Redis;
@@ -48,7 +53,7 @@ const validateSetTime = (setTime: CacheTimestampInterface): void => {
   if (setTime.seconds < 0) throw new Error('seconds must be positive');
   if (setTime.microseconds < 0) throw new Error('microseconds must be positive');
   // eslint-disable-next-line no-magic-numbers
-  if (setTime.microseconds > 1000000) throw new Error('microseconds must be in microseconds');
+  if (setTime.microseconds > 1_000_000) throw new Error('microseconds must be in microseconds');
 };
 
 /**
@@ -115,7 +120,9 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Suppress connection errors
+   *
    * @param {Error} error
+   * @param error.message
    * @returns {null}
    */
   private suppressConnectionError(error: { message: string }): null {
@@ -130,10 +137,11 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Invalidate on reconnection
+   *
    * @param {any} result
    * @returns {any}
    */
-  private async invalidateOnReconnection<T>(result: T): Promise<T | null> {
+  private async invalidateOnReconnection<I>(result: I): Promise<I | null> {
     if (this.config.resetOnReconnection && this.invalidateOnConnection) {
       // eslint-disable-next-line no-console
       console.log(`Resetting cache on: ${this.config.prefix}`);
@@ -147,6 +155,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Get setTime keys
+   *
    * @param {string} key
    * @returns {{}}
    */
@@ -159,6 +168,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Get setTime list keys
+   *
    * @param {string} key
    * @returns {{}}
    */
@@ -171,6 +181,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Get prefixed key
+   *
    * @param {string} key
    * @returns {string}
    */
@@ -180,6 +191,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Get prefixed list key
+   *
    * @param {string} key
    * @returns {string}
    */
@@ -189,6 +201,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Get ttl seconds
+   *
    * @param {number} overrideTtlSec
    * @returns {number}
    */
@@ -216,19 +229,21 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Get time from redis
+   *
    * @returns {Promise<CacheTimestampInterface>}
    */
   async getTime(): Promise<CacheTimestampInterface> {
     const result = await this.services.redis.time();
     const [timestampSec, timestampUs] = result;
     return {
-      seconds: parseInt(timestampSec, 10),
-      microseconds: parseInt(timestampUs, 10),
+      seconds: Number.parseInt(timestampSec, 10),
+      microseconds: Number.parseInt(timestampUs, 10),
     };
   }
 
   /**
    * Set the cache, but only if the provided times are the latest
+   *
    * @param {string} key
    * @param {T} instance
    * @param {CacheTimestampInterface} setTime
@@ -267,6 +282,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Set value in cache
+   *
    * @param {string} key
    * @param {T} instance
    * @param {number} [overrideTtlSec]
@@ -299,13 +315,14 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Set list in cache if setTime is latest
+   *
    * @param {string} key
    * @param {T[]} instances
    * @param {CacheTimestampInterface} setTime
    * @param {number} [overrideTtlSec]
    * @returns {Promise<void>}
    */
-  async setListSafe(key: string, instances: T[], setTime: CacheTimestampInterface, overrideTtlSec?: number) {
+  async setListSafe(key: string, instances: T[], setTime: CacheTimestampInterface, overrideTtlSec?: number): Promise<void> {
     if (!this.enabled) return;
 
     validateSetTime(setTime);
@@ -337,6 +354,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Set list in cache
+   *
    * @param {string} key
    * @param {T[]} instances
    * @param {number} [overrideTtlSec]
@@ -350,7 +368,7 @@ export class Cache<T> implements CacheInterface<T> {
       return;
     }
 
-    const stringifiedInstances = await Bluebird.filter(instances, (instance) => !!instance)
+    const stringifiedInstances = await Bluebird.filter(instances, (instance: T): boolean => !!instance)
       .map((instance) => this.config.stringifyForCache(instance))
       .filter((instance) => !!instance);
 
@@ -369,6 +387,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Get value from cache by key
+   *
    * @param {string} key
    * @returns {Promise<*>}
    */
@@ -388,6 +407,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Get list from cache
+   *
    * @param {string} key
    * @returns {Promise<T[] | null>}
    */
@@ -414,6 +434,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Safe delete value from cache by key
+   *
    * @param {string} key
    * @param {CacheTimestampInterface} setTime
    * @param {number} overrideTtlSec
@@ -439,6 +460,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Delete value from cache by key
+   *
    * @param {string} key
    * @returns {Promise<void>}
    */
@@ -457,6 +479,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Delete list value from cache by key
+   *
    * @param {string} key
    * @param {CacheTimestampInterface} setTime
    * @param {number} overrideTtlSec
@@ -482,6 +505,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Delete list value from cache
+   *
    * @param {string} key
    * @returns {Promise<void>}
    */
@@ -500,6 +524,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Delete all lists with prefix from cache
+   *
    * @returns {Promise<void>}
    */
   async delLists(): Promise<void> {
@@ -509,6 +534,7 @@ export class Cache<T> implements CacheInterface<T> {
 
   /**
    * Invalidate any entries for this cache
+   *
    * @param {string} [prefix]
    * @returns {Promise<void>}
    */
@@ -528,7 +554,7 @@ export class Cache<T> implements CacheInterface<T> {
         stream.resume();
       });
 
-      stream.on('end', () => resolve());
+      stream.on('end', (): void => resolve(undefined));
       stream.on('error', (err) => reject(err));
     });
   }
