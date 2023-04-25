@@ -1,12 +1,14 @@
-[@ehacke/redis](README.md)
+@ehacke/redis
 
 # @ehacke/redis
 
-## Index
+## Table of contents
 
-### Modules
+### Classes
 
-* ["cache"](modules/_cache_.md)
-* ["cached"](modules/_cached_.md)
-* ["index"](modules/_index_.md)
-* ["redis"](modules/_redis_.md)
+- [Cache](classes/Cache.md)
+
+### Interfaces
+
+- [CacheInterface](interfaces/CacheInterface.md)
+- [CacheTimestampInterface](interfaces/CacheTimestampInterface.md)

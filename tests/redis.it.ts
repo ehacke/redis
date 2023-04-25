@@ -3,8 +3,8 @@
 import Promise from 'bluebird';
 import { expect } from 'chai';
 import { config } from 'dotenv';
-import { Redis } from 'index';
 import { v4 as uuid } from 'uuid';
+import { Redis } from '../index';
 
 config();
 describe('integration tests', () => {
@@ -27,7 +27,7 @@ describe('integration tests', () => {
     let calls = 0;
     const totalCalls = 100;
 
-    const times = [...new Array(totalCalls).keys()];
+    const times = [...Array.from({ length: totalCalls }).keys()];
     const timeoutMs = 500;
     await Promise.map(
       times,

@@ -1,0 +1,36 @@
+{
+  "extends": ["@gapizza/eslint-config-ts"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "unicorn/prefer-ternary": "off"
+  },
+  "parserOptions": {
+    "project": "./tsconfig.base.json",
+    "sourceType": "module",
+    "extraFileExtensions": [".cjs"]
+  },
+  "overrides": [
+    {
+      "files": [
+        "tests/*",
+        "tests/**/*",
+        "scripts/*",
+        "scripts/**/*",
+        ".eslintrc.json"
+      ],
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/camelcase": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "eslint-comments/disable-enable-pair": "off",
+        "func-names": "off",
+        "no-console": "warn",
+        "no-magic-numbers": "off",
+        "require-jsdoc": "off",
+        "sonarjs/no-identical-functions": "off",
+        "unicorn/filename-case": "off",
+        "valid-jsdoc": "off"
+      }
+    }
+  ]
+}
