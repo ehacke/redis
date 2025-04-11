@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { processMultiResults } from '../index';
+import { processMultiResults } from '../index.ts';
 
 describe('unit tests', () => {
   it('processes multi result', () => {

@@ -1,21 +1,21 @@
 import Promise from 'bluebird';
 import { expect } from 'chai';
 import { config } from 'dotenv';
-import { Cached, Redis } from '../index';
+import { Cached, Redis } from '../index.ts';
 
-import { CacheTimestampInterface } from '../cache';
+import { CacheTimestampInterface } from '../cache.ts';
 
 config();
 
 describe('cached integration tests', () => {
-  let redis;
+  let redis: Redis;
 
   beforeEach(async () => {
     redis = new Redis({
       // eslint-disable-next-line no-process-env
       host: process.env.REDIS_HOST,
       // eslint-disable-next-line no-process-env
-      port: process.env.REDIS_PORT,
+      port: Number.parseInt(process.env.REDIS_PORT as string),
     });
 
     await redis.flushdb();
@@ -298,11 +298,11 @@ describe('cached integration tests', () => {
         );
       }
 
-      async set(key, value) {
+      async set(key: string, value: string) {
         await this.cache.set(key, value);
       }
 
-      async get(key) {
+      async get(key: string) {
         return this.cache.get(key);
       }
     }
@@ -364,14 +364,14 @@ describe('cached integration tests', () => {
 });
 
 describe('safely operate on cache', () => {
-  let redis;
+  let redis: Redis;
 
   beforeEach(async () => {
     redis = new Redis({
       // eslint-disable-next-line no-process-env
       host: process.env.REDIS_HOST,
       // eslint-disable-next-line no-process-env
-      port: process.env.REDIS_PORT,
+      port: Number.parseInt(process.env.REDIS_PORT as string),
     });
 
     await redis.flushdb();

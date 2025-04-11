@@ -4,7 +4,7 @@ import Promise from 'bluebird';
 import { expect } from 'chai';
 import { config } from 'dotenv';
 import { v4 as uuid } from 'uuid';
-import { Redis } from '../index';
+import { Redis } from '../index.ts';
 
 config();
 describe('integration tests', () => {
@@ -16,9 +16,11 @@ describe('integration tests', () => {
   });
 
   it('debounces many calls using redis', async () => {
+    console.log(process.env.REDIS_PORT);
+
     redis = new Redis({
       host: process.env.REDIS_HOST,
-      port: process.env.REDIS_PORT,
+      port: Number.parseInt(process.env.REDIS_PORT as string),
     });
 
     let counter = 0;
@@ -49,7 +51,7 @@ describe('integration tests', () => {
   it('gets lock', async () => {
     redis = new Redis({
       host: process.env.REDIS_HOST,
-      port: process.env.REDIS_PORT,
+      port: Number.parseInt(process.env.REDIS_PORT as string),
     });
 
     const lockId = uuid();
@@ -70,7 +72,7 @@ describe('integration tests', () => {
   it('scan for keys', async () => {
     redis = new Redis({
       host: process.env.REDIS_HOST,
-      port: process.env.REDIS_PORT,
+      port: Number.parseInt(process.env.REDIS_PORT as string),
     });
 
     await redis.set('foo-thing', 10);
@@ -85,7 +87,7 @@ describe('integration tests', () => {
   it('zscan for keys', async () => {
     redis = new Redis({
       host: process.env.REDIS_HOST,
-      port: process.env.REDIS_PORT,
+      port: Number.parseInt(process.env.REDIS_PORT as string),
     });
 
     await redis.zadd('some-set', 10 as any, 'foo-thing');
