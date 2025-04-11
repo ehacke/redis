@@ -1,7 +1,7 @@
 {
   "name": "@ehacke/redis",
   "description": "Simple wrapper around ioredis, with some extra functionality",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Eric Hacke",
   "bugs": {
     "url": "https://github.com/ehacke/redis/issues"
