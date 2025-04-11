@@ -1,7 +1,7 @@
 {
   "name": "@ehacke/redis",
   "description": "Simple wrapper around ioredis, with some extra functionality",
-  "version": "1.1.5",
+  "version": "2.0.0",
   "author": "Eric Hacke",
   "bugs": {
     "url": "https://github.com/ehacke/redis/issues"
@@ -73,7 +73,7 @@
       "fixpack"
     ]
   },
-  "main": "dist/index.js",
+  "main": "index.ts",
   "peerDependencies": {
     "ioredis": "^4.28.0"
   },
@@ -103,6 +103,5 @@
     "unit": "c8 mocha --recursive -r source-map-support/register -r ts-node/register -r tsconfig-paths/register --use_strict --exit \"tests/**/*.unit.+(ts|js)\"",
     "update:packageVersion": "cat package.json | jq \".version = \\\"$(npm view @ehacke/redis version)\\\"\" > package.json"
   },
-  "type": "module",
-  "types": "dist/index.d.ts"
+  "type": "module"
 }
