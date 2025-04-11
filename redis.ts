@@ -1,7 +1,5 @@
 import { Redis as IORedis, RedisOptions } from 'ioredis';
-// import ScanStreamOption from 'ioredis';
 import Redlock from 'redlock';
-// eslint-disable-next-line import/extensions
 import { ScanStreamOptions } from 'ioredis/built/types.js';
 
 enum SEARCH_FIELD_TYPES {
@@ -57,8 +55,9 @@ export class Redis extends IORedis {
   constructor(port: number);
   constructor(path: string);
   constructor();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(...arguments_: any) {
-    // @ts-ignore
+    // @ts-expect-error I don't care
     super(...arguments_);
 
     this.NAME = 'redis';
@@ -92,9 +91,8 @@ export class Redis extends IORedis {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (error: any) {
               if (error?.message?.includes('Unable to fully release the lock on resource')) {
-                // eslint-disable-next-line no-console
                 console.error(error?.message);
-                // eslint-disable-next-line no-console
+
                 console.error('Above error is likely caused by the lock expiring before unlock');
                 return;
               }
@@ -113,7 +111,6 @@ export class Redis extends IORedis {
       });
   }
 
-  /* eslint-disable unicorn/no-object-as-default-parameter */
   /**
    * Get redlock instance
    *
@@ -127,8 +124,6 @@ export class Redis extends IORedis {
     return new Redlock([this], config);
   }
 
-  /* eslint-enable unicorn/no-object-as-default-parameter */
-
   /**
    * Wrapper for scanStream that returns a promise
    *
@@ -141,7 +136,6 @@ export class Redis extends IORedis {
       const keys = [] as string[];
 
       stream.on('data', (resultKeys) => {
-        // eslint-disable-next-line no-restricted-syntax
         for (const element of resultKeys) {
           keys.push(element);
         }
@@ -165,7 +159,6 @@ export class Redis extends IORedis {
       const keys = [] as string[];
 
       stream.on('data', (resultKeys) => {
-        // eslint-disable-next-line no-restricted-syntax
         for (const element of resultKeys) {
           keys.push(element);
         }

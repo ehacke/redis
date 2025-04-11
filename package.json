@@ -1,7 +1,7 @@
 {
   "name": "@ehacke/redis",
   "description": "Simple wrapper around ioredis, with some extra functionality",
-  "version": "5.0.0",
+  "version": "1.1.5",
   "author": "Eric Hacke",
   "bugs": {
     "url": "https://github.com/ehacke/redis/issues"
@@ -22,7 +22,7 @@
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@ehacke/commitlint-config": "^4.0.2",
-    "@ehacke/eslint-config": "^2.0.3",
+    "@ehacke/eslint-config": "^2.1.2",
     "@ehacke/prettier-config": "^3.0.1",
     "@eslint/js": "^9.24.0",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",

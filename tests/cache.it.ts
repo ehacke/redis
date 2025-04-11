@@ -12,9 +12,8 @@ describe('cached integration tests', () => {
 
   beforeEach(async () => {
     redis = new Redis({
-      // eslint-disable-next-line no-process-env
       host: process.env.REDIS_HOST,
-      // eslint-disable-next-line no-process-env
+
       port: Number.parseInt(process.env.REDIS_PORT as string),
     });
 
@@ -22,7 +21,7 @@ describe('cached integration tests', () => {
   });
 
   after(async () => {
-    // eslint-disable-next-line no-unused-expressions
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     redis && (await redis.disconnect());
   });
 
@@ -31,10 +30,10 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 10,
         parseFromCache: (result) => result,
+        prefix: 'something',
         stringifyForCache: (result) => result,
+        ttlSec: 10,
       }
     );
 
@@ -47,15 +46,15 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 10,
         parseFromCache: (result) => JSON.parse(result),
+        prefix: 'something',
         stringifyForCache: (result) => JSON.stringify(result),
+        ttlSec: 10,
       }
     );
 
-    await cached.cache.set('foo', { foo: 'something', bar: 9 });
-    expect(await cached.cache.get('foo')).to.eql({ foo: 'something', bar: 9 });
+    await cached.cache.set('foo', { bar: 9, foo: 'something' });
+    expect(await cached.cache.get('foo')).to.eql({ bar: 9, foo: 'something' });
   });
 
   it('set and get complex list values in cache', async () => {
@@ -63,27 +62,27 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 10,
         parseFromCache: (result) => JSON.parse(result),
+        prefix: 'something',
         stringifyForCache: (result) => JSON.stringify(result),
+        ttlSec: 10,
       }
     );
 
-    await cached.cache.set('foo', { foo: 'no-conflict', bar: 90 });
+    await cached.cache.set('foo', { bar: 90, foo: 'no-conflict' });
 
     await cached.cache.setList('foo', [
-      { foo: 'something', bar: 9 },
-      { foo: 'another', bar: 1 },
+      { bar: 9, foo: 'something' },
+      { bar: 1, foo: 'another' },
     ]);
     expect(await cached.cache.getList('foo')).to.eql([
-      { foo: 'something', bar: 9 },
-      { foo: 'another', bar: 1 },
+      { bar: 9, foo: 'something' },
+      { bar: 1, foo: 'another' },
     ]);
 
     expect(await cached.cache.get('foo')).to.eql({
-      foo: 'no-conflict',
       bar: 90,
+      foo: 'no-conflict',
     });
   });
 
@@ -92,34 +91,34 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 10,
         parseFromCache: (result) => JSON.parse(result),
+        prefix: 'something',
         stringifyForCache: (result) => JSON.stringify(result),
+        ttlSec: 10,
       }
     );
 
-    await cached.cache.set('foo', { foo: 'no-conflict', bar: 90 });
+    await cached.cache.set('foo', { bar: 90, foo: 'no-conflict' });
 
     await cached.cache.setList('foo', [
-      { foo: 'something', bar: 9 },
-      { foo: 'another', bar: 1 },
+      { bar: 9, foo: 'something' },
+      { bar: 1, foo: 'another' },
     ]);
     await cached.cache.setList('other-foo', [
-      { foo: 'something', bar: 9 },
-      { foo: 'another', bar: 1 },
+      { bar: 9, foo: 'something' },
+      { bar: 1, foo: 'another' },
     ]);
     await cached.cache.delList('foo');
 
     expect(await cached.cache.getList('foo')).to.eql(null);
     expect(await cached.cache.getList('other-foo')).to.eql([
-      { foo: 'something', bar: 9 },
-      { foo: 'another', bar: 1 },
+      { bar: 9, foo: 'something' },
+      { bar: 1, foo: 'another' },
     ]);
 
     expect(await cached.cache.get('foo')).to.eql({
-      foo: 'no-conflict',
       bar: 90,
+      foo: 'no-conflict',
     });
   });
 
@@ -128,22 +127,22 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 10,
         parseFromCache: (result) => JSON.parse(result),
+        prefix: 'something',
         stringifyForCache: (result) => JSON.stringify(result),
+        ttlSec: 10,
       }
     );
 
-    await cached.cache.set('foo', { foo: 'no-conflict', bar: 90 });
+    await cached.cache.set('foo', { bar: 90, foo: 'no-conflict' });
 
     await cached.cache.setList('foo', [
-      { foo: 'something', bar: 9 },
-      { foo: 'another', bar: 1 },
+      { bar: 9, foo: 'something' },
+      { bar: 1, foo: 'another' },
     ]);
     await cached.cache.setList('other-foo', [
-      { foo: 'something', bar: 9 },
-      { foo: 'another', bar: 1 },
+      { bar: 9, foo: 'something' },
+      { bar: 1, foo: 'another' },
     ]);
     await cached.cache.delLists();
 
@@ -151,8 +150,8 @@ describe('cached integration tests', () => {
     expect(await cached.cache.getList('other-foo')).to.eql(null);
 
     expect(await cached.cache.get('foo')).to.eql({
-      foo: 'no-conflict',
       bar: 90,
+      foo: 'no-conflict',
     });
   });
 
@@ -161,10 +160,10 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 10,
         parseFromCache: (result) => JSON.parse(result),
+        prefix: 'something',
         stringifyForCache: (result) => JSON.stringify(result),
+        ttlSec: 10,
       }
     );
 
@@ -179,20 +178,20 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 10,
         parseFromCache: (result) => result,
+        prefix: 'something',
         stringifyForCache: (result) => result,
+        ttlSec: 10,
       }
     );
     const otherCached = new Cached<string>();
     otherCached.configureCache(
       { redis },
       {
-        prefix: 'something-else',
-        ttlSec: 10,
         parseFromCache: (result) => result,
+        prefix: 'something-else',
         stringifyForCache: (result) => result,
+        ttlSec: 10,
       }
     );
 
@@ -205,10 +204,10 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 1,
         parseFromCache: (result) => result,
+        prefix: 'something',
         stringifyForCache: (result) => result,
+        ttlSec: 1,
       }
     );
 
@@ -222,10 +221,10 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 10,
         parseFromCache: (result) => result,
+        prefix: 'something',
         stringifyForCache: (result) => result,
+        ttlSec: 10,
       }
     );
 
@@ -239,10 +238,10 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 10,
         parseFromCache: (result) => result,
+        prefix: 'something',
         stringifyForCache: (result) => result,
+        ttlSec: 10,
       }
     );
 
@@ -256,20 +255,20 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 10,
         parseFromCache: (result) => result,
+        prefix: 'something',
         stringifyForCache: (result) => result,
+        ttlSec: 10,
       }
     );
     const otherCached = new Cached<string>();
     otherCached.configureCache(
       { redis },
       {
-        prefix: 'something-else',
-        ttlSec: 10,
         parseFromCache: (result) => result,
+        prefix: 'something-else',
         stringifyForCache: (result) => result,
+        ttlSec: 10,
       }
     );
 
@@ -290,10 +289,10 @@ describe('cached integration tests', () => {
         this.configureCache(
           { redis },
           {
-            prefix: 'something',
-            ttlSec: 10,
             parseFromCache: (result) => result,
+            prefix: 'something',
             stringifyForCache: (result) => result,
+            ttlSec: 10,
           }
         );
       }
@@ -321,10 +320,10 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis: notHereRedis },
       {
-        prefix: 'something',
-        ttlSec: 1,
         parseFromCache: (result) => result,
+        prefix: 'something',
         stringifyForCache: (result) => result,
+        ttlSec: 1,
       }
     );
 
@@ -338,10 +337,10 @@ describe('cached integration tests', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 1,
         parseFromCache: (result) => result,
+        prefix: 'something',
         stringifyForCache: (result) => result,
+        ttlSec: 1,
       }
     );
 
@@ -349,8 +348,7 @@ describe('cached integration tests', () => {
     expect(await cached.cache.get('foo')).to.eql('bar');
 
     const oldSetex = redis.setex;
-    // eslint-disable-next-line prettier/prettier
-    redis.setex = () => Promise.reject(new Error('stream isn\'t writeable'));
+    redis.setex = () => Promise.reject(new Error("stream isn't writeable"));
 
     await cached.cache.set('foo', 'bar');
     expect(await cached.cache.get('foo')).to.eql(null);
@@ -368,9 +366,8 @@ describe('safely operate on cache', () => {
 
   beforeEach(async () => {
     redis = new Redis({
-      // eslint-disable-next-line no-process-env
       host: process.env.REDIS_HOST,
-      // eslint-disable-next-line no-process-env
+
       port: Number.parseInt(process.env.REDIS_PORT as string),
     });
 
@@ -378,7 +375,7 @@ describe('safely operate on cache', () => {
   });
 
   after(async () => {
-    // eslint-disable-next-line no-unused-expressions
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     redis && (await redis.disconnect());
   });
 
@@ -387,10 +384,10 @@ describe('safely operate on cache', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 1,
         parseFromCache: (result) => result,
+        prefix: 'something',
         stringifyForCache: (result) => result,
+        ttlSec: 1,
       }
     );
 
@@ -398,16 +395,16 @@ describe('safely operate on cache', () => {
     expect(await cached.cache.get(someKey)).to.eql(null);
 
     const firstSetTime: CacheTimestampInterface = {
-      seconds: 10,
       microseconds: 5,
+      seconds: 10,
     };
 
     await cached.cache.setSafe(someKey, 'first', firstSetTime);
     expect(await cached.cache.get(someKey)).to.eql('first');
 
     const secondSetTime: CacheTimestampInterface = {
-      seconds: 12,
       microseconds: 5,
+      seconds: 12,
     };
 
     await cached.cache.setSafe(someKey, 'second', secondSetTime);
@@ -422,10 +419,10 @@ describe('safely operate on cache', () => {
     cached.configureCache(
       { redis },
       {
-        prefix: 'something',
-        ttlSec: 1,
         parseFromCache: (result) => result,
+        prefix: 'something',
         stringifyForCache: (result) => result,
+        ttlSec: 1,
       }
     );
 
@@ -433,16 +430,16 @@ describe('safely operate on cache', () => {
     expect(await cached.cache.get(someKey)).to.eql(null);
 
     const firstSetTime: CacheTimestampInterface = {
-      seconds: 10,
       microseconds: 5,
+      seconds: 10,
     };
 
     await cached.cache.setSafe(someKey, 'first', firstSetTime);
     expect(await cached.cache.get(someKey)).to.eql('first');
 
     const secondSetTime: CacheTimestampInterface = {
-      seconds: 12,
       microseconds: 5,
+      seconds: 12,
     };
 
     await cached.cache.setSafe(someKey, 'second', secondSetTime);
@@ -452,8 +449,8 @@ describe('safely operate on cache', () => {
     expect(await cached.cache.get(someKey)).to.eql(null);
 
     const thirdSetTime: CacheTimestampInterface = {
-      seconds: 16,
       microseconds: 5,
+      seconds: 16,
     };
 
     await cached.cache.setSafe(someKey, 'first', firstSetTime);

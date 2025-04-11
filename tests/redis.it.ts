@@ -1,5 +1,4 @@
-/* eslint-disable no-process-env, no-unused-expressions */
-
+/* eslint-disable @typescript-eslint/no-unused-expressions,@typescript-eslint/no-explicit-any */
 import Promise from 'bluebird';
 import { expect } from 'chai';
 import { config } from 'dotenv';
@@ -35,7 +34,7 @@ describe('integration tests', () => {
       times,
       async () => {
         calls++;
-        // @ts-ignore
+        // @ts-expect-error test
         await redis.debounce(updateCounter, 'foo', timeoutMs);
         await Promise.delay(50);
       },
@@ -62,7 +61,7 @@ describe('integration tests', () => {
     const otherLock = await redis.lock(lockId, 30);
     expect(otherLock).to.eql(null);
 
-    // @ts-ignore
+    // @ts-expect-error test
     await lock.unlock();
 
     const lastLock = await redis.lock(lockId, 30);

@@ -1,5 +1,5 @@
-import { Cache, CacheInterface, CacheTimestampInterface } from './cache';
-import { Redis } from './redis';
+import { Cache, CacheInterface, CacheTimestampInterface } from './cache.ts';
+import { Redis } from './redis.js';
 
 interface ServicesInterface {
   redis: Redis;
@@ -13,7 +13,7 @@ interface ConfigInterface<T> {
   parseFromCache(instance: string): Promise<T> | T;
 }
 
-/* eslint-disable class-methods-use-this, no-empty-function, @typescript-eslint/no-empty-function */
+
 
 class NoCache<T> implements CacheInterface<T> {
   async del(): Promise<void> {}
@@ -56,13 +56,13 @@ class NoCache<T> implements CacheInterface<T> {
 
   async getTime(): Promise<CacheTimestampInterface> {
     return {
-      seconds: 0,
       microseconds: 0,
+      seconds: 0,
     };
   }
 }
 
-/* eslint-enable class-methods-use-this, no-empty-function, @typescript-eslint/no-empty-function */
+
 
 /**
  * @class

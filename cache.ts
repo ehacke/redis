@@ -18,7 +18,9 @@ interface ConfigInterface<T> {
   prefix: string;
   ttlSec: number;
   resetOnReconnection?: boolean;
+
   stringifyForCache(instance: T): Promise<string> | string;
+
   parseFromCache(instance: string): Promise<T> | T;
 }
 
@@ -29,19 +31,33 @@ export interface CacheTimestampInterface {
 
 export interface CacheInterface<T> {
   enable(): void;
+
   disable(): void;
+
   set(key: string, instance: T, overrideTtlSec?: number): Promise<void>;
+
   setSafe(key: string, instance: T, setTime: CacheTimestampInterface, overrideTtlSec?: number): Promise<void>;
+
   setList(key: string, instances: T[], overrideTtlSec?: number): Promise<void>;
+
   setListSafe(key: string, instances: T[], setTime: CacheTimestampInterface, overrideTtlSec?: number): Promise<void>;
+
   get(key: string): Promise<T | null>;
+
   getList(key: string): Promise<T[] | null>;
+
   del(key: string): Promise<void>;
+
   delSafe(key: string, setTime: CacheTimestampInterface, overrideTtlSec?: number): Promise<void>;
+
   delList(key: string): Promise<void>;
+
   delListSafe(key: string, setTime: CacheTimestampInterface, overrideTtlSec?: number): Promise<void>;
+
   delLists(): Promise<void>;
+
   invalidate(prefix?: string): Promise<void>;
+
   getTime(): Promise<CacheTimestampInterface>;
 }
 
@@ -52,7 +68,7 @@ export interface CacheInterface<T> {
 const validateSetTime = (setTime: CacheTimestampInterface): void => {
   if (setTime.seconds < 0) throw new Error('seconds must be positive');
   if (setTime.microseconds < 0) throw new Error('microseconds must be positive');
-  // eslint-disable-next-line no-magic-numbers
+
   if (setTime.microseconds > 1_000_000) throw new Error('microseconds must be in microseconds');
 };
 
@@ -101,12 +117,12 @@ export class Cache<T> implements CacheInterface<T> {
     this.enabled = true;
 
     this.services.redis.defineCommand('setSafe', {
-      numberOfKeys: 3,
       lua: fs.readFileSync(path.join(__dirname, './setSafe.lua'), 'utf8'),
+      numberOfKeys: 3,
     });
     this.services.redis.defineCommand('delSafe', {
-      numberOfKeys: 3,
       lua: fs.readFileSync(path.join(__dirname, './delSafe.lua'), 'utf8'),
+      numberOfKeys: 3,
     });
   }
 
@@ -126,8 +142,7 @@ export class Cache<T> implements CacheInterface<T> {
    * @returns {null}
    */
   private suppressConnectionError(error: { message: string }): null {
-    // eslint-disable-next-line prettier/prettier
-    if (error && error.message && error.message.toLowerCase().includes('stream isn\'t writeable')) {
+    if (error && error.message && error.message.toLowerCase().includes("stream isn't writeable")) {
       this.invalidateOnConnection = true;
       return null;
     }
@@ -143,7 +158,6 @@ export class Cache<T> implements CacheInterface<T> {
    */
   private async invalidateOnReconnection<I>(result: I): Promise<I | null> {
     if (this.config.resetOnReconnection && this.invalidateOnConnection) {
-      // eslint-disable-next-line no-console
       console.log(`Resetting cache on: ${this.config.prefix}`);
       this.invalidateOnConnection = false;
       await this.invalidate();
@@ -161,8 +175,8 @@ export class Cache<T> implements CacheInterface<T> {
    */
   getTimeKeys(key: string): { timestampSecondKey: string; timestampMicrosecondKey: string } {
     return {
-      timestampSecondKey: `${this.config.prefix}${Cache.TIMESTAMP_SEC_PREFIX}${key}`,
       timestampMicrosecondKey: `${this.config.prefix}${Cache.TIMESTAMP_US_PREFIX}${key}`,
+      timestampSecondKey: `${this.config.prefix}${Cache.TIMESTAMP_SEC_PREFIX}${key}`,
     };
   }
 
@@ -174,8 +188,8 @@ export class Cache<T> implements CacheInterface<T> {
    */
   getTimeListKeys(key: string): { timestampSecondKey: string; timestampMicrosecondKey: string } {
     return {
-      timestampSecondKey: `${this.config.prefix}${Cache.LIST_PREFIX}${Cache.TIMESTAMP_SEC_PREFIX}${key}`,
       timestampMicrosecondKey: `${this.config.prefix}${Cache.LIST_PREFIX}${Cache.TIMESTAMP_US_PREFIX}${key}`,
+      timestampSecondKey: `${this.config.prefix}${Cache.LIST_PREFIX}${Cache.TIMESTAMP_SEC_PREFIX}${key}`,
     };
   }
 
@@ -236,8 +250,8 @@ export class Cache<T> implements CacheInterface<T> {
     const result = await this.services.redis.time();
     const [timestampSec, timestampUs] = result;
     return {
-      seconds: timestampSec,
       microseconds: timestampUs,
+      seconds: timestampSec,
     };
   }
 
@@ -274,8 +288,10 @@ export class Cache<T> implements CacheInterface<T> {
     const { timestampSecondKey, timestampMicrosecondKey } = this.getTimeKeys(key);
     const { seconds, microseconds } = setTime;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (this.services.redis as any)
       .setSafe(this.getKey(key), timestampSecondKey, timestampMicrosecondKey, value, this.getTtlSec(overrideTtlSec), seconds, microseconds)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .then((result: any) => this.invalidateOnReconnection(result))
       .catch((error: { message: string }) => this.suppressConnectionError(error));
   }
@@ -346,8 +362,10 @@ export class Cache<T> implements CacheInterface<T> {
     const { timestampSecondKey, timestampMicrosecondKey } = this.getTimeListKeys(key);
     const { seconds, microseconds } = setTime;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (this.services.redis as any)
       .setSafe(this.getKey(key), timestampSecondKey, timestampMicrosecondKey, value, this.getTtlSec(overrideTtlSec), seconds, microseconds)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .then((result: any) => this.invalidateOnReconnection(result))
       .catch((error: { message: string }) => this.suppressConnectionError(error));
   }
@@ -452,8 +470,10 @@ export class Cache<T> implements CacheInterface<T> {
     const { timestampSecondKey, timestampMicrosecondKey } = this.getTimeKeys(key);
     const { seconds, microseconds } = setTime;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (this.services.redis as any)
       .delSafe(this.getKey(key), timestampSecondKey, timestampMicrosecondKey, this.getTtlSec(overrideTtlSec), seconds, microseconds)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .then((result: any) => this.invalidateOnReconnection(result))
       .catch((error: { message: string }) => this.suppressConnectionError(error));
   }
@@ -497,8 +517,10 @@ export class Cache<T> implements CacheInterface<T> {
     const { timestampSecondKey, timestampMicrosecondKey } = this.getTimeListKeys(key);
     const { seconds, microseconds } = setTime;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (this.services.redis as any)
       .delSafe(this.getKey(key), timestampSecondKey, timestampMicrosecondKey, this.getTtlSec(overrideTtlSec), seconds, microseconds)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .then((result: any) => this.invalidateOnReconnection(result))
       .catch((error: { message: string }) => this.suppressConnectionError(error));
   }
@@ -543,8 +565,8 @@ export class Cache<T> implements CacheInterface<T> {
 
     await new Promise((resolve, reject) => {
       const stream = this.services.redis.scanStream({
-        match: `${prefix}*`,
         count: 100,
+        match: `${prefix}*`,
       });
       stream.on('data', async (resultKeys) => {
         stream.pause();
