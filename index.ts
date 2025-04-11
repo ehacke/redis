@@ -1,3 +1,3 @@
-export * from './redis';
-export * from './cached';
-export * from './cache';
+export * from './redis.ts';
+export * from './cached.ts';
+export * from './cache.ts';

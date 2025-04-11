@@ -1,9 +1,9 @@
 import Bluebird from 'bluebird';
-import fs from 'fs';
+import fs from 'node:fs';
 import { isBoolean, isInteger, isObject, isString } from 'lodash-es';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { Redis } from './redis';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { Redis } from './redis.ts';
 
 const { dirname } = path;
 
@@ -22,6 +22,11 @@ interface ConfigInterface<T> {
   parseFromCache(instance: string): Promise<T> | T;
 }
 
+export interface CacheTimestampInterface {
+  seconds: number;
+  microseconds: number;
+}
+
 export interface CacheInterface<T> {
   enable(): void;
   disable(): void;
@@ -36,13 +41,8 @@ export interface CacheInterface<T> {
   delList(key: string): Promise<void>;
   delListSafe(key: string, setTime: CacheTimestampInterface, overrideTtlSec?: number): Promise<void>;
   delLists(): Promise<void>;
-  invalidate(prefix?): Promise<void>;
+  invalidate(prefix?: string): Promise<void>;
   getTime(): Promise<CacheTimestampInterface>;
-}
-
-export interface CacheTimestampInterface {
-  seconds: number;
-  microseconds: number;
 }
 
 /**
@@ -236,8 +236,8 @@ export class Cache<T> implements CacheInterface<T> {
     const result = await this.services.redis.time();
     const [timestampSec, timestampUs] = result;
     return {
-      seconds: Number.parseInt(timestampSec, 10),
-      microseconds: Number.parseInt(timestampUs, 10),
+      seconds: timestampSec,
+      microseconds: timestampUs,
     };
   }
 
@@ -276,8 +276,8 @@ export class Cache<T> implements CacheInterface<T> {
 
     await (this.services.redis as any)
       .setSafe(this.getKey(key), timestampSecondKey, timestampMicrosecondKey, value, this.getTtlSec(overrideTtlSec), seconds, microseconds)
-      .then((result) => this.invalidateOnReconnection(result))
-      .catch((error) => this.suppressConnectionError(error));
+      .then((result: any) => this.invalidateOnReconnection(result))
+      .catch((error: { message: string }) => this.suppressConnectionError(error));
   }
 
   /**
@@ -348,8 +348,8 @@ export class Cache<T> implements CacheInterface<T> {
 
     await (this.services.redis as any)
       .setSafe(this.getKey(key), timestampSecondKey, timestampMicrosecondKey, value, this.getTtlSec(overrideTtlSec), seconds, microseconds)
-      .then((result) => this.invalidateOnReconnection(result))
-      .catch((error) => this.suppressConnectionError(error));
+      .then((result: any) => this.invalidateOnReconnection(result))
+      .catch((error: { message: string }) => this.suppressConnectionError(error));
   }
 
   /**
@@ -454,8 +454,8 @@ export class Cache<T> implements CacheInterface<T> {
 
     await (this.services.redis as any)
       .delSafe(this.getKey(key), timestampSecondKey, timestampMicrosecondKey, this.getTtlSec(overrideTtlSec), seconds, microseconds)
-      .then((result) => this.invalidateOnReconnection(result))
-      .catch((error) => this.suppressConnectionError(error));
+      .then((result: any) => this.invalidateOnReconnection(result))
+      .catch((error: { message: string }) => this.suppressConnectionError(error));
   }
 
   /**
@@ -499,8 +499,8 @@ export class Cache<T> implements CacheInterface<T> {
 
     await (this.services.redis as any)
       .delSafe(this.getKey(key), timestampSecondKey, timestampMicrosecondKey, this.getTtlSec(overrideTtlSec), seconds, microseconds)
-      .then((result) => this.invalidateOnReconnection(result))
-      .catch((error) => this.suppressConnectionError(error));
+      .then((result: any) => this.invalidateOnReconnection(result))
+      .catch((error: { message: string }) => this.suppressConnectionError(error));
   }
 
   /**
