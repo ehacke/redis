@@ -1,9 +1,9 @@
 import Promise from 'bluebird';
 import { expect } from 'chai';
 import { config } from 'dotenv';
-import { Cached, Redis } from '../index.ts';
+import { Cached, Redis } from '../index';
 
-import { CacheTimestampInterface } from '../cache.ts';
+import { CacheTimestampInterface } from '../cache';
 
 config();
 

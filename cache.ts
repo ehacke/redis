@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { isBoolean, isInteger, isObject, isString } from 'lodash-es';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { Redis } from './redis.ts';
+import { Redis } from './redis';
 
 const { dirname } = path;
 

@@ -1,5 +1,5 @@
-import { Cache, CacheInterface, CacheTimestampInterface } from './cache.ts';
-import { Redis } from './redis.js';
+import { Cache, CacheInterface, CacheTimestampInterface } from './cache';
+import { Redis } from './redis';
 
 interface ServicesInterface {
   redis: Redis;

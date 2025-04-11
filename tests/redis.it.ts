@@ -3,7 +3,7 @@ import Promise from 'bluebird';
 import { expect } from 'chai';
 import { config } from 'dotenv';
 import { v4 as uuid } from 'uuid';
-import { Redis } from '../index.ts';
+import { Redis } from '../index';
 
 config();
 describe('integration tests', () => {
