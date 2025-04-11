@@ -83,7 +83,6 @@
   },
   "scripts": {
     "beta": "npm run update:packageVersion && ./scripts/publish-beta.sh",
-    "build": "rm -rf ./dist && tsc -p tsconfig.build.json && cp *.lua dist/",
     "docker:down": "COMPOSE_PROJECT_NAME=local docker-compose down --remove-orphans",
     "docker:restart": "npm run docker:down && npm run docker:up",
     "docker:up": "COMPOSE_PROJECT_NAME=local docker-compose up -d",
@@ -95,7 +94,6 @@
     "minor": "npm run update:packageVersion && npm version --git-tag-version false minor && npm publish && npm run tag",
     "patch": "npm run update:packageVersion && npm version --git-tag-version false patch && npm publish && npm run tag",
     "postpublish": "git push",
-    "prepublishOnly": "npm run build",
     "preversion": "npm run lint",
     "tag": "git stash && git tag v\"$(npm view @ehacke/redis version)\" && git push origin --tags",
     "test": "c8 mocha --recursive -r source-map-support/register -r ts-node/register -r tsconfig-paths/register --use_strict --exit \"tests/**/*.+(unit|it).+(ts|js)\"",
