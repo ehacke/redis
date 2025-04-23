@@ -15,8 +15,6 @@ describe('integration tests', () => {
   });
 
   it('debounces many calls using redis', async () => {
-    console.log(process.env.REDIS_PORT);
-
     redis = new Redis({
       host: process.env.REDIS_HOST,
       port: Number.parseInt(process.env.REDIS_PORT as string),

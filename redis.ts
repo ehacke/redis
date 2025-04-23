@@ -1,4 +1,4 @@
-import { Redis as IORedis, RedisOptions } from 'ioredis';
+import IORedis, { RedisOptions } from 'ioredis';
 import Redlock from 'redlock';
 import { ScanStreamOptions } from 'ioredis/built/types.js';
 
