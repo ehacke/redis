@@ -1,6 +1,6 @@
 import IORedis, { RedisOptions } from 'ioredis';
+import { ScanStreamOptions } from 'ioredis/built/types';
 import Redlock from 'redlock';
-import { ScanStreamOptions } from 'ioredis/built/types.js';
 
 enum SEARCH_FIELD_TYPES {
   TAG = 'tag',
